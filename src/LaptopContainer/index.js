@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LaptopList from '../LaptopList'
 import './index.css'
+import NewLaptopForm from '../NewLaptopForm'
 
 export default class LaptopContainer extends Component {
 
@@ -33,10 +34,35 @@ export default class LaptopContainer extends Component {
     }
   }
 
+  createNewLaptop = async (laptopToBeCreated) => {
+    try {
+      const url = process.env.REACT_APP_API_URL + "/api/v1/laptops/"
+      const newLaptopResponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(laptopToBeCreated)
+      })
+
+        const newLaptopJson = newLaptopResponse.json()
+
+        if (newLaptopResponse.status === 201) {
+          const state = this.state
+          state.laptops.push(newLaptopJson.data)
+          this.setState(state)
+        }
+    }
+    catch (e) {
+      console.error(e);
+    }
+  }
+
   render() {
     return(
       <React.Fragment>
-        <h3 className="LaptopContainer"> Here the best laptops in the word! </h3>
+        <h3 className="LaptopContainer"> Here are the best laptops in the word! </h3>
+          <NewLaptopForm createNewLaptop={this.createNewLaptop}/>
           <LaptopList laptops={this.state.laptops}/>
       </React.Fragment>
     )

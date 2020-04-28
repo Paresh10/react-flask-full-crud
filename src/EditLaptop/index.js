@@ -7,8 +7,8 @@ export default class EditLaptop extends Component {
     super(props)
 
       this.state = {
-        maker: '',
-        model: '',
+        maker: props.laptopToBeEdited.maker,
+        model: props.laptopToBeEdited.model,
         manufactured_on: Date()
       }
   }

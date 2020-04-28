@@ -102,7 +102,12 @@ export default class LaptopContainer extends Component {
           deleteLaptop={this.deleteLaptop}
           editLaptop={this.editLaptop}
           />
-          { this.state.idOfLaptopToBeEdited !== -1 && <EditLaptop /> }
+          { this.state.idOfLaptopToBeEdited !== -1
+            &&
+            <EditLaptop
+            laptopToBeEdited = {this.state.laptops.find((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)}
+            />
+          }
       </React.Fragment>
     )
   }

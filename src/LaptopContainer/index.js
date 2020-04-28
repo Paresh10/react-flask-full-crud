@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LaptopList from '../LaptopList'
 import NewLaptopForm from '../NewLaptopForm'
+import EditLaptop from '../EditLaptop'
 import './index.css'
 
 export default class LaptopContainer extends Component {
@@ -9,9 +10,9 @@ export default class LaptopContainer extends Component {
     super(props)
 
       this.state = {
-        laptops: []
+        laptops: [],
+        idOfLaptopToBeEdited: -1
       }
-
   }
 
   componentDidMount() {
@@ -85,6 +86,12 @@ export default class LaptopContainer extends Component {
     }
   }
 
+  editLaptop = async (idOfLaptopToBeEdited) => {
+    this.setState({
+      idOfLaptopToBeEdited: idOfLaptopToBeEdited
+    })
+  }
+
   render() {
     return(
       <React.Fragment>
@@ -93,7 +100,9 @@ export default class LaptopContainer extends Component {
           <LaptopList
           laptops={this.state.laptops}
           deleteLaptop={this.deleteLaptop}
+          editLaptop={this.editLaptop}
           />
+          { this.state.idOfLaptopToBeEdited !== -1 && <EditLaptop /> }
       </React.Fragment>
     )
   }

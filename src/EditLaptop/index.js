@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Label, Segment } from 'semantic-ui-react'
 
-export default class NewLaptopForm extends Component {
+export default class EditLaptop extends Component {
 
   constructor(props) {
     super(props)
@@ -21,20 +21,14 @@ export default class NewLaptopForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.createNewLaptop(this.state)
+    // this.props.createNewLaptop(this.state)
 
-    // clear the form
-    this.setState({
-      make: '',
-      model: '',
-      manufactured_on: Date()
-    })
   }
 
   render() {
     return(
       <Segment>
-        <h3> Add new laptop! </h3>
+        <h3> Edit </h3>
         <Form onSubmit={this.handleSubmit}>
           <Label> Maker </Label>
           <Form.Input
@@ -65,7 +59,7 @@ export default class NewLaptopForm extends Component {
           onChange={this.handleChange}
           />
 
-          <Button type="Submit"> Add New Laptop! </Button>
+          <Button type="Submit"> Update Laptop! </Button>
         </Form>
       </Segment>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
 
-export default function DogList(props) {
+export default function LaptopList(props) {
 
   const laptopsToBeDisplayed = props.laptops.map(laptop => {
     return (
@@ -22,6 +22,10 @@ export default function DogList(props) {
           <Button
             onClick={() => props.deleteLaptop(laptop.id) }>
             Remove
+          </Button>
+          <Button
+            onClick={() => props.editLaptop(laptop.id) } >
+            Edit {laptop.model}
           </Button>
         </Card.Content>
       </Card>

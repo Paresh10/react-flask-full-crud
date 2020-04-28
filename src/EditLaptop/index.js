@@ -21,7 +21,7 @@ export default class EditLaptop extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    // this.props.createNewLaptop(this.state)
+    this.props.updateLaptop(this.state)
 
   }
 

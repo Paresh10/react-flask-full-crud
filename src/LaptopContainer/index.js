@@ -92,6 +92,31 @@ export default class LaptopContainer extends Component {
     })
   }
 
+  updateLaptop = async (updatedLaptopInfo) => {
+    const url = process.env.REACT_APP_API_URL + "/api/v1/lapttops/" + this.state.idOfLaptopToBeEdited
+
+    try {
+      const updateLaptop = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(updatedLaptopInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const updatedLaptopJson = await updateLaptop.json()
+
+      if (updateLaptop.status === 200) {
+        const laptops = this.state.laptops
+        const indexOfLaptopToBeUpdated = laptops.find((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)
+      }
+
+    }
+    catch (e) {
+        console.error(e);
+    }
+  }
+
   render() {
     return(
       <React.Fragment>
@@ -106,6 +131,7 @@ export default class LaptopContainer extends Component {
             &&
             <EditLaptop
             laptopToBeEdited = {this.state.laptops.find((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)}
+            updateLaptop={this.updateLaptop}
             />
           }
       </React.Fragment>

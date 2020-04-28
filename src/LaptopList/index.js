@@ -18,6 +18,12 @@ export default function DogList(props) {
           {laptop.manufactured_on}
           </Card.Description>
         </Card.Content>
+        <Card.Content>
+          <Button
+            onClick={() => props.deleteLaptop(laptop.id) }>
+            Remove
+          </Button>
+        </Card.Content>
       </Card>
     )
   })

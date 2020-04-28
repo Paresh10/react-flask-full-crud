@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import LaptopList from '../LaptopList'
+import './index.css'
 
 export default class LaptopContainer extends Component {
 
@@ -18,20 +20,12 @@ export default class LaptopContainer extends Component {
   getAllTheLaptops = async () => {
     try {
       const url = await process.env.REACT_APP_API_URL + "/api/v1/laptops/"
-
-      console.log("fetch data");
-      console.log(url);
-
       const laptopsToGet = await fetch(url)
-
-      console.log("laptopsToGet");
-      console.log(laptopsToGet);
-
       const laptopsJson = await laptopsToGet.json()
 
-      console.log("laptopsJson");
-      console.log(laptopsJson);
-
+      this.setState({
+        laptops: laptopsJson.data
+      })
 
     }
     catch (e) {
@@ -41,7 +35,10 @@ export default class LaptopContainer extends Component {
 
   render() {
     return(
-      <h3> LaptopContainer </h3>
+      <React.Fragment>
+        <h3 className="LaptopContainer"> Here the best laptops in the word! </h3>
+          <LaptopList laptops={this.state.laptops}/>
+      </React.Fragment>
     )
   }
 

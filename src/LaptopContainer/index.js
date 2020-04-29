@@ -93,7 +93,7 @@ export default class LaptopContainer extends Component {
   }
 
   updateLaptop = async (updatedLaptopInfo) => {
-    const url = process.env.REACT_APP_API_URL + "/api/v1/lapttops/" + this.state.idOfLaptopToBeEdited
+    const url = process.env.REACT_APP_API_URL + "/api/v1/laptops/" + this.state.idOfLaptopToBeEdited
 
     try {
       const updateLaptop = await fetch(url, {
@@ -108,13 +108,24 @@ export default class LaptopContainer extends Component {
 
       if (updateLaptop.status === 200) {
         const laptops = this.state.laptops
-        const indexOfLaptopToBeUpdated = laptops.find((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)
+        const indexOfLaptopToBeUpdated = laptops.findIndex((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)
+
+        this.setState({
+          laptops: laptops,
+          idOfLaptopToBeEdited: -1 // Close the modal
+        })
       }
 
     }
     catch (e) {
         console.error(e);
     }
+  }
+
+  closeModal = () => {
+    this.setState({
+      idOfLaptopToBeEdited: -1
+    })
   }
 
   render() {
@@ -132,6 +143,7 @@ export default class LaptopContainer extends Component {
             <EditLaptop
             laptopToBeEdited = {this.state.laptops.find((laptop) => laptop.id === this.state.idOfLaptopToBeEdited)}
             updateLaptop={this.updateLaptop}
+            closeModal={this.closeModal}
             />
           }
       </React.Fragment>
